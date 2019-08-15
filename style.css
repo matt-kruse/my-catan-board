@@ -1,0 +1,280 @@
+html,body { margin:0; padding:0; overflow:hidden; }
+
+/* VARIABLES */
+
+:root {
+  --side-gutter: 200px;
+  --total-gutter: calc(var(--side-gutter)*2);
+  --top-gutter: 50px;
+  --max-board-size: calc(100vw - var(--total-gutter));
+  --side: 9.5%;
+  --h: calc(var(--side) / 2);
+  --w: calc(var(--side) * 0.8660254);
+  --corner-circle-r: 2.4%;
+  --number-circle-r: 2.5%;
+  --settlement-size: 4%;
+  --city-size: 5%;
+  --tan: #CEB492;
+}
+
+/* A screen layer which will prevent clicks on things that are not active */
+#screen {
+  position:absolute;
+  width:100%;
+  height:100%;
+  z-index:99;
+}
+
+/* This is our layer that will catch all clicks */
+#input {
+  position:absolute;
+  width:100vw;
+  height:100vh;
+}
+
+.board { 
+  width:calc(100vh - var(--top-gutter));
+  height:calc(100vh - var(--top-gutter));
+  max-width:var(--max-board-size) !important;
+  max-height:var(--max-board-size) !important;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:var(--top-gutter);
+  position:relative;
+  background-color:#0196CE;
+  overflow:hidden;
+}
+.board > * {
+  position:absolute;
+}
+
+/* COLORS */
+
+.player-red { background-color: red !important; }
+.player-blue { background-color: blue !important; }
+.player-green { background-color: green !important; }
+
+/* GRID / PLACEMENT */
+
+/* Hexagons */
+.row-0 { top: calc(50% - (var(--h)*9)); }
+.row-1 { top: calc(50% - (var(--h)*6)); }
+.row-2 { top: calc(50% - (var(--h)*3)); }
+.row-3 { top: 50%; }
+.row-4 { top: calc(50% + (var(--h)*3)); }
+.row-5 { top: calc(50% + (var(--h)*6)); }
+.row-6 { top: calc(50% + (var(--h)*9)); }
+
+.col-0 { left: calc(50% - (var(--w)*5)); }
+.col-1 { left: calc(50% - (var(--w)*4)); }
+.col-2 { left: calc(50% - (var(--w)*3)); }
+.col-3 { left: calc(50% - (var(--w)*2)); }
+.col-4 { left: calc(50% - (var(--w)*1)); }
+.col-5 { left: 50%; }
+.col-6 { left: calc(50% + (var(--w)*1)); }
+.col-7 { left: calc(50% + (var(--w)*2)); }
+.col-8 { left: calc(50% + (var(--w)*3)); }
+.col-9 { left: calc(50% + (var(--w)*4)); }
+.col-10{ left: calc(50% + (var(--w)*5)); }
+.col-11{ left: calc(50% + (var(--w)*6) - 2%); }
+
+
+.boat {
+  width:7%;
+  height:7%;
+  margin-top:-3.5%;
+  margin-left:-3.5%;
+  opacity: .7;
+  background:transparent url("./images/boat.gif") no-repeat center center;
+  background-size:cover;
+  
+  z-index:8;
+}
+
+/* RESOURCES */
+.resource {
+  width:calc(var(--w)*2);
+  height:calc(var(--h)*4);
+  margin-left:calc(var(--w) * -1);
+  margin-top:calc(var(--h) * -2);
+  z-index:1
+  background-color:black;
+}
+.resource.robber {
+  opacity:.5;
+}
+.resource.desert.robber {
+  opacity:1;
+}
+.desert {
+  background: transparent url("./images/desert.gif") no-repeat center center;
+  background-size: cover;
+}
+.brick {
+  background: transparent url("./images/brick.gif") no-repeat center center;
+  background-size: cover;
+}
+.wheat {
+  background: transparent url("./images/wheat.gif") no-repeat center center;
+  background-size: cover;
+}
+.sheep {
+  background: transparent url("./images/sheep.gif") no-repeat center center;
+  background-size: cover;
+}
+.wood {
+  background: transparent url("./images/wood.gif") no-repeat center center;
+  background-size: cover;
+}
+.ore {
+  background: transparent url("./images/ore.gif") no-repeat center center;
+  background-size: cover;
+}
+
+/* NUMBERS */
+
+.number {
+  width: calc(var(--number-circle-r)*2);
+  height: calc(var(--number-circle-r)*2);
+  margin-left:calc(var(--number-circle-r) * -1);
+  margin-top:calc(var(--number-circle-r) * -1);
+  border-radius:50%;
+  background-color:var(--tan);
+  border:2px solid black;
+  z-index:4;
+  text-align:center;
+  line-height:100%;
+  font-size:100%;
+  font-weight:bold;
+  cursor:pointer;
+}
+.number.robber {
+  border:3px solid red;
+  color:black;
+  background:white url("./images/robber.gif") no-repeat center center;
+  background-size:cover;
+}
+html:not([class~="mode"]) .number.robber {
+  z-index:101;
+}
+
+/* CORNERS */
+
+.corner {
+  z-index:3;
+  cursor:pointer;
+  
+}
+.corner.settlement {
+  width: calc(var(--settlement-size));
+  height: calc(var(--settlement-size));
+  border:1.5px solid black;
+}
+.corner.city {
+  width: calc(var(--city-size));
+  height: calc(var(--city-size));
+  margin-left: calc(var(--city-size)*-0.5);
+  margin-top: calc(var(--city-size)*-0.5);
+  background:transparent url("./images/city.gif") no-repeat center center;
+  background-size:cover;
+}
+.corner:not(.settlement):not(.city) {
+  width: calc(var(--corner-circle-r)*2);
+  height: calc(var(--corner-circle-r)*2);
+  margin-left:calc(var(--corner-circle-r)*-1);
+  margin-top:calc(var(--corner-circle-r)*-1);
+  border-radius:50%;
+  background-color:var(--tan);
+  opacity:.7;
+}
+.corner.port {
+  border:1px solid #333 !important;
+}
+.corner.port::after {
+  width:50%;
+  height:10%;
+  background-color:black;
+  position:absolute;
+  z-index:8;
+  content:" ";
+}
+.corner.port-n::after {
+  transform: rotate(90deg);
+  margin-left:25%;
+  margin-top:-50%;
+}
+.corner.port-ne::after {
+  transform: rotate(135deg);
+  margin-left:100%;
+  margin-top:-10%;
+}
+.corner.port-e::after {
+  margin-left:120%;
+  margin-top:25%;
+}
+.corner.port-se::after {
+  transform: rotate(45deg);
+  margin-left:100%;
+  margin-top:110%;
+}
+.corner.port-s::after {
+  transform: rotate(90deg);
+  margin-left:25%;
+  margin-top:150%;
+}
+.corner.port-sw::after {
+  transform: rotate(135deg);
+  margin-left:-50%;
+  margin-top:100%;
+}
+.corner.port-w::after {
+  margin-left:-70%;
+  margin-top:50%;
+}
+.corner.port-nw::after {
+  transform: rotate(45deg);
+  margin-left:-50%;
+  margin-top:-10%;
+}
+
+/* ROADS */
+
+.road {
+  width: calc(var(--side));
+  height: 1%;
+  cursor: pointer;
+  z-index:2;
+  background-color:#666;
+}
+
+.road.side-1 {
+  transform: rotate(30deg);
+  margin-left: 0;
+  margin-top: calc(var(--h)*-1.5);
+}
+.road.side-2 {
+  transform: rotate(90deg);
+  margin-left: calc(var(--w)*0.45);
+  margin-top: 0px;
+}
+.road.side-3 {
+  transform: rotate(150deg);
+  margin-left: 0;
+  margin-top: calc(var(--h)*1.5);
+}
+.road.side-4 {
+  transform: rotate(210deg);
+  margin-left: calc(var(--w)*-1);
+  margin-top: calc(var(--h)*1.5);
+}
+.road.side-5 {
+  transform: rotate(270deg);
+  margin-left: calc(var(--w)*-1.55);
+  margin-top: 0px;
+}
+.road.side-6 {
+  transform: rotate(330deg);
+  margin-left: calc(var(--w)*-1);
+  margin-top: calc(var(--h)*-1.6);
+}
+
