@@ -1,3 +1,16 @@
+let mode = null;
+let html = document.querySelector('html');
+let handler = {};
+
+function setmode(m) {
+  mode = m;
+  html.setAttribute('mode',m);
+}
+function clearmode() {
+  mode = null;
+  html.setAttribute('mode','');
+}
+
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -8,10 +21,18 @@ function shuffle(a) {
 
 document.querySelector('#input').addEventListener('click', (e)=>{
   e.stopPropagation();
-	let t = e.target;
+	let sel,t = e.target;
   if ("screen"===t.id || "input"===t.id) { return; }
-  
-	alert(e.target.className);
+  let mode = t.getAttribute('mode');
+  if (mode) {
+    if (typeof handler[mode]==="function") {
+      handler[mode](t,mode);
+    }
+    setmode(mode);
+  }
+  else {
+    clearmode();
+  }
 });
 
 function Settlement(board,col,row,cn) {
@@ -20,12 +41,14 @@ function Settlement(board,col,row,cn) {
   this.dom = document.createElement("div");
   this.dom.className = "corner " + (cn?cn:"");
   this.dom.style=`left:calc(50% + (var(--w)*${col})); top:calc(50% + (var(--h)*${row}));`;
+  this.dom.setAttribute('mode','selectcorner');
   board.appendChild(this.dom);
 }
 function Road(board,row,col,side) {
 	this.player = null;
   this.dom = document.createElement("div");
   this.dom.className = `road row-${row} col-${col} side-${side}`;
+  this.dom.setAttribute('mode','selectroad');
   board.appendChild(this.dom);
 }
 function Port(type) {
@@ -179,3 +202,18 @@ roads.push(new Road(board,5,7,4));
 // Create ports
 let ports = [new Port("31"), new Port("31"), new Port("31"), new Port("31"), new Port("wheat"), new Port("sheep"), new Port("ore"), new Port("wood"), new Port("brick")];
 
+// Click Handlers
+handler.selectroad = (el)=>{
+  if (mode==="placeroad") {
+    clearmode();
+    el.classList.add("player");
+    el.classList.add("player-red");
+  }
+};
+handler.selectcorner = (el)=>{
+  if (mode==="placesettlement") {
+    el.classList.add("city");
+    el.classList.add("player");
+    el.classList.add("player-red");
+  }
+};

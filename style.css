@@ -47,6 +47,9 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
 .board > * {
   position:absolute;
 }
+*:not(html)[mode] {
+  cursor:pointer;
+}
 
 /* COLORS */
 
@@ -111,7 +114,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   height:calc(var(--h)*4);
   margin-left:calc(var(--w) * -1);
   margin-top:calc(var(--h) * -2);
-  z-index:1
+  z-index:1;
   background-color:black;
 }
 .resource.robber {
@@ -175,7 +178,6 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
 .corner {
   z-index:3;
   cursor:pointer;
-  
 }
 .corner.settlement {
   width: calc(var(--settlement-size));
@@ -187,7 +189,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   height: calc(var(--city-size));
   margin-left: calc(var(--city-size)*-0.5);
   margin-top: calc(var(--city-size)*-0.5);
-  background:transparent url("./images/city.gif") no-repeat center center;
+  background:transparent url("./images/city-red.gif") no-repeat center center;
   background-size:cover;
 }
 .corner:not(.settlement):not(.city) {
@@ -198,6 +200,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   border-radius:50%;
   background-color:var(--tan);
   opacity:.5;
+  display:none;
 }
 .corner.port {
   border:1px solid #333 !important;
@@ -258,6 +261,9 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   z-index:2;
   background-color:#666;
 }
+.road.player {
+  height:1.5%;
+}
 
 .road.side-1 {
   transform: rotate(30deg);
@@ -267,7 +273,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
 .road.side-2 {
   transform: rotate(90deg);
   margin-left: calc(var(--w)*0.45);
-  margin-top: 0px;
+  margin-top: 0;
 }
 .road.side-3 {
   transform: rotate(150deg);
@@ -282,7 +288,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
 .road.side-5 {
   transform: rotate(270deg);
   margin-left: calc(var(--w)*-1.55);
-  margin-top: 0px;
+  margin-top: 0;
 }
 .road.side-6 {
   transform: rotate(330deg);
