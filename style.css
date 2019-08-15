@@ -1,4 +1,4 @@
-html,body { margin:0; padding:0; overflow:hidden; }
+html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
 
 /* VARIABLES */
 
@@ -53,6 +53,20 @@ html,body { margin:0; padding:0; overflow:hidden; }
 .player-red { background-color: red !important; }
 .player-blue { background-color: blue !important; }
 .player-green { background-color: green !important; }
+
+/* PLAYER PANELS */
+.player-panel {
+  width:var(--side-gutter);
+  height:var(--side-gutter);
+  border:10px solid red;
+  border-radius:20px;
+  background-color:white;
+  position:absolute;
+}
+.player-panel.top { top:0; }
+.player-panel.left { left:0; }
+.player-panel.bottom { bottom:0; }
+.player-panel.right { right:0; }
 
 /* GRID / PLACEMENT */
 
@@ -185,7 +199,7 @@ html:not([class~="mode"]) .number.robber {
   margin-top:calc(var(--corner-circle-r)*-1);
   border-radius:50%;
   background-color:var(--tan);
-  opacity:.7;
+  opacity:.5;
 }
 .corner.port {
   border:1px solid #333 !important;
@@ -193,7 +207,7 @@ html:not([class~="mode"]) .number.robber {
 .corner.port::after {
   width:50%;
   height:10%;
-  background-color:black;
+  background-color:#333;
   position:absolute;
   z-index:8;
   content:" ";

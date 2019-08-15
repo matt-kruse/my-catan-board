@@ -1,3 +1,11 @@
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 document.querySelector('#input').addEventListener('click', (e)=>{
   e.stopPropagation();
 	let t = e.target;
@@ -43,10 +51,8 @@ function Port(type) {
 	this.type = type;
 }
 
-// TODO: Randomize
-let numbers = [2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12];
-// TODO: Randomize
-let resources = ["wood","wood","wood","wood","sheep","sheep","sheep","sheep","wheat","wheat","wheat","wheat","brick","brick","brick","ore","ore","ore","desert"];
+let numbers = shuffle([2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12]);
+let resources = shuffle(["wood","wood","wood","wood","sheep","sheep","sheep","sheep","wheat","wheat","wheat","wheat","brick","brick","brick","ore","ore","ore","desert"]);
 
 // BUILD THE UI COMPONENTS
 
