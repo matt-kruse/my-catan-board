@@ -28,31 +28,9 @@ function Road(board,row,col,side) {
   this.dom.className = `road row-${row} col-${col} side-${side}`;
   board.appendChild(this.dom);
 }
-function Territory(board,resource,row,col,number,settlements) {
-	this.resource = resource;
-  this.number = number;
-  this.settlements = settlements.map(i=>settlements[i]);
-  
-  this.dom_hex = document.createElement('div');
-  this.dom_hex.className = `resource ${resource} row-${row} col-${col}`;
-  board.appendChild(this.dom_hex);
-  
-  this.dom_number = document.createElement('DIV');
-  this.dom_number.className = `number row-${row} col-${col}`;
-  if ("desert"===resource) {
-  	this.dom_number.className += " robber";
-    this.dom_hex.className += " robber";
-  } else {
-	  this.dom_number.innerText = number;
-  }
-  board.appendChild(this.dom_number);
-}
 function Port(type) {
 	this.type = type;
 }
-
-let numbers = shuffle([2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12]);
-let resources = shuffle(["wood","wood","wood","wood","sheep","sheep","sheep","sheep","wheat","wheat","wheat","wheat","brick","brick","brick","ore","ore","ore","desert"]);
 
 // BUILD THE UI COMPONENTS
 
@@ -124,30 +102,53 @@ let settlements = [
 ]
 
 // Create territories
+i=0;
+let numbers = shuffle([2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12]);
+let resources = shuffle(["wood","wood","wood","wood","sheep","sheep","sheep","sheep","wheat","wheat","wheat","wheat","brick","brick","brick","ore","ore","ore","desert"]);
+function Territory(board,row,col,settlements) {
+  this.resource = resources.shift();
+  this.number = this.resource === "desert" ? null : numbers.shift();
+  this.settlements = settlements.map(i=>settlements[i]);
+
+  this.dom_hex = document.createElement('div');
+  this.dom_hex.className = `resource ${this.resource} row-${row} col-${col}`;
+  board.appendChild(this.dom_hex);
+
+  this.dom_number = document.createElement('DIV');
+  this.dom_number.className = `number row-${row} col-${col}`;
+  if ("desert"===this.resource) {
+    this.dom_number.className += " robber";
+    this.dom_hex.className += " robber";
+  } else {
+    this.dom_number.innerText = this.number;
+  }
+  board.appendChild(this.dom_number);
+}
+
 let territories = [
-	new Territory(board,resources[0],1,3,numbers[0],[0,1,2,10,9,8]),
-  new Territory(board,resources[1],1,5,numbers[1],[2,3,4,12,11,10]),
-  new Territory(board,resources[2],1,7,numbers[2],[4,5,6,14,13,12]),
+	new Territory(board,1,3,[0,1,2,10,9,8]),
+  new Territory(board,1,5,[2,3,4,12,11,10]),
+  new Territory(board,1,7,[4,5,6,14,13,12]),
   
-  new Territory(board,resources[3],2,2,numbers[3],[7,8,9,19,18,17]),
-  new Territory(board,resources[4],2,4,numbers[4],[9,10,11,21,20,19]),
-  new Territory(board,resources[5],2,6,numbers[5],[11,12,13,23,22,21]),
-  new Territory(board,resources[6],2,8,numbers[6],[13,14,15,25,24,23]),
+  new Territory(board,2,2,[7,8,9,19,18,17]),
+  new Territory(board,2,4,[9,10,11,21,20,19]),
+  new Territory(board,2,6,[11,12,13,23,22,21]),
+  new Territory(board,2,8,[13,14,15,25,24,23]),
   
-  new Territory(board,resources[7],3,1,numbers[7],[16,17,18,29,28,27]),
-  new Territory(board,resources[8],3,3,numbers[8],[18,19,20,31,30,29]),
-  new Territory(board,resources[9],3,5,numbers[9],[20,21,22,33,32,31]),
-  new Territory(board,resources[10],3,7,numbers[10],[22,23,24,35,34,33]),
-  new Territory(board,resources[11],3,9,numbers[11],[24,25,26,37,36,35]),
+  new Territory(board,3,1,[16,17,18,29,28,27]),
+  new Territory(board,3,3,[18,19,20,31,30,29]),
+  new Territory(board,3,5,[20,21,22,33,32,31]),
+  new Territory(board,3,7,[22,23,24,35,34,33]),
+  new Territory(board,3,9,[24,25,26,37,36,35]),
   
-  new Territory(board,resources[12],4,2,numbers[12],[28,29,30,40,39,38]),
-  new Territory(board,resources[13],4,4,numbers[13],[30,31,32,42,41,40]),
-  new Territory(board,resources[14],4,6,numbers[14],[32,33,34,44,43,42]),
-  new Territory(board,resources[15],4,8,numbers[15],[34,35,36,46,45,44]),
+  new Territory(board,4,2,[28,29,30,40,39,38]),
+  new Territory(board,4,4,[30,31,32,42,41,40]),
+  new Territory(board,4,6,[32,33,34,44,43,42]),
+  new Territory(board,4,8,[34,35,36,46,45,44]),
   
-  new Territory(board,resources[16],5,3,numbers[16],[39,40,41,49,48,47]),
-  new Territory(board,resources[17],5,5,numbers[17],[41,42,43,51,50,49]),
-  new Territory(board,resources[18],5,7,numbers[18],[43,44,45,53,52,51])
+  new Territory(board,5,3,[39,40,41,49,48,47]),
+  new Territory(board,5,5,[41,42,43,51,50,49]),
+  new Territory(board,5,7,[43,44,45,53,52,51])
 ];
 
 let rows = [1,1,1,2,2,2,2,3,3,3,3,3,4,4,4,4,5,5,5];

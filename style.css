@@ -157,8 +157,9 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   border:2px solid black;
   z-index:4;
   text-align:center;
-  line-height:100%;
-  font-size:100%;
+  line-height:3vh;
+  font-size:3vh;
+  vertical-align:center;
   font-weight:bold;
   cursor:pointer;
 }
@@ -167,9 +168,6 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   color:black;
   background:white url("./images/robber.gif") no-repeat center center;
   background-size:cover;
-}
-html:not([class~="mode"]) .number.robber {
-  z-index:101;
 }
 
 /* CORNERS */
