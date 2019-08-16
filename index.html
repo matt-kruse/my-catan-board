@@ -10,12 +10,17 @@
   <div id="input">
 
     <div class="player-panel player-panel-red bottom right">
-      <div mode="placeroad">Place a red road</div>
-      <div mode="placesettlement">Place a red settlement</div>
+      <div mode="placeroad" message="Select a location to place your road">Place a red road</div>
+      <div mode="placesettlement" message="Select a location to place your settlement">Place a red settlement</div>
     </div>
 
+    <div class="message"></div>
     <div class="board">
       <div id="screen"></div>
+
+      <div class="dice button" mode="roll">ROLL DICE</div>
+      <div class="cancel"></div>
+      <div class="done"></div>
 
       <div class="boat row-0 col-2"></div>
       <div class="boat row-0 col-6"></div>

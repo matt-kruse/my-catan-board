@@ -5,7 +5,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 :root {
   --side-gutter: 200px;
   --total-gutter: calc(var(--side-gutter)*2);
-  --top-gutter: 50px;
+  --top-gutter: 30px;
   --max-board-size: calc(100vw - var(--total-gutter));
   --side: 9.5%;
   --h: calc(var(--side) / 2);
@@ -51,6 +51,37 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 .board > * {
   position:absolute;
 }
+
+/* MESSAGE AREA */
+.message {
+    background-color:white;
+    border:5px solid black;
+    border-radius:20px;
+    height:var(--top-gutter);
+    width:calc(100vw - 50px);
+    position:absolute;
+    top:0;
+    left:0;
+    display:none;
+    padding:5px 20px;
+    font-size:calc(var(--top-gutter));
+}
+
+/* BUTTONS ETC */
+.button {
+    background-color:white;
+    border:3px solid black;
+    border-radius:5px;
+    padding:5px;
+    font-size:4vh;
+    height:calc(var(--side)*.5);
+    z-index:101;
+}
+.dice {
+    top:0;
+    right:0;
+}
+
 *:not(html)[mode] {
     cursor:pointer;
 }
@@ -63,8 +94,8 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 
 /* PLAYER PANELS */
 .player-panel {
-  width:var(--side-gutter);
-  height:var(--side-gutter);
+  width:200px;
+  height:30vh;
   border:10px solid red;
   border-radius:20px;
   background-color:white;
@@ -121,12 +152,6 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   margin-top:calc(var(--h) * -2);
   z-index:1;
   background-color:black;
-}
-.resource.robber {
-  opacity:.5;
-}
-.resource.desert.robber {
-  opacity:1;
 }
 .desert {
   background: transparent url("./images/desert.png") no-repeat center center;
@@ -189,6 +214,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 .corner.settlement {
   width: calc(var(--settlement-size));
   height: calc(var(--settlement-size));
+  opacity:1;
 }
 .corner.city {
   width: calc(var(--city-size));
@@ -197,6 +223,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   margin-top: calc(var(--city-size)*-0.5);
   background:transparent url("./images/city-red.gif") no-repeat center center;
   background-size:cover;
+  opacity:1;
 }
 .corner:not(.settlement):not(.city) {
   width: calc(var(--corner-circle-r)*2);

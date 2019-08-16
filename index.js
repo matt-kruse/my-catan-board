@@ -1,5 +1,6 @@
 let mode = null;
 let html = document.querySelector('html');
+let message = document.querySelector('.message');
 let handler = {};
 
 function setmode(m) {
@@ -9,6 +10,15 @@ function setmode(m) {
 function clearmode() {
   mode = null;
   html.setAttribute('mode','');
+  clearmessage();
+}
+function clearmessage() {
+  message.innerText = "";
+  message.style.display="none";
+}
+function setmessage(msg) {
+  message.innerHTML = msg;
+  message.style.display="block";
 }
 
 function shuffle(a) {
@@ -24,6 +34,10 @@ document.querySelector('#input').addEventListener('click', (e)=>{
 	let sel,t = e.target;
   if ("screen"===t.id || "input"===t.id) { return; }
   let mode = t.getAttribute('mode');
+  let msg = t.getAttribute('message');
+  if (msg) {
+    setmessage(msg);
+  }
   if (mode) {
     if (typeof handler[mode]==="function") {
       handler[mode](t,mode);
@@ -122,7 +136,7 @@ let settlements = [
   new Settlement(board,1,7,"port port-s"),
   new Settlement(board,2,8),
   new Settlement(board,3,7)  
-]
+];
 
 // Create territories
 i=0;
@@ -216,4 +230,16 @@ handler.selectcorner = (el)=>{
     el.classList.add("player");
     el.classList.add("player-red");
   }
+};
+handler.roll = (el)=>{
+  Array.from(document.querySelectorAll('.roll-active')).forEach(a=>{
+    a.classList.remove("roll-active");
+  });
+  let roll = Math.ceil(Math.random()*11)+1;
+  territories.forEach(t=>{
+    if (t.number === roll || (roll===7 && t.number===null)) {
+      t.dom_hex.classList.add("roll-active");
+      t.dom_number.classList.add("roll-active");
+    }
+  });
 };
