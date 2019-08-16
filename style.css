@@ -1,4 +1,4 @@
-html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
+html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 44); }
 
 /* VARIABLES */
 
@@ -15,6 +15,8 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   --settlement-size: 4%;
   --city-size: 5%;
   --tan: #CEB492;
+  /* --rotation: 30deg */
+  --rotation: 0
 }
 
 /* A screen layer which will prevent clicks on things that are not active */
@@ -41,14 +43,14 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   margin-right:auto;
   margin-top:var(--top-gutter);
   position:relative;
-  background-color:#0196CE;
+  /* background-color:#0196CE; */
+  background: transparent url("./images/water.gif") no-repeat center center;
   overflow:hidden;
+  transform: rotate(var(--rotation));
+  background-size: contain;
 }
 .board > * {
   position:absolute;
-}
-*:not(html)[mode] {
-  cursor:pointer;
 }
 
 /* COLORS */
@@ -93,6 +95,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
 .col-8 { left: calc(50% + (var(--w)*3)); }
 .col-9 { left: calc(50% + (var(--w)*4)); }
 .col-10{ left: calc(50% + (var(--w)*5)); }
+.col-10p5{ left: calc(50% + (var(--w)*5.5)); }
 .col-11{ left: calc(50% + (var(--w)*6) - 2%); }
 
 
@@ -101,10 +104,10 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   height:7%;
   margin-top:-3.5%;
   margin-left:-3.5%;
-  opacity: .7;
+  /* opacity: .7; */
   background:transparent url("./images/boat.gif") no-repeat center center;
   background-size:cover;
-  
+  transform: rotate(calc(-1*var(--rotation)));
   z-index:8;
 }
 
@@ -124,27 +127,27 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   opacity:1;
 }
 .desert {
-  background: transparent url("./images/desert.gif") no-repeat center center;
+  background: transparent url("./images/desert.png") no-repeat center center;
   background-size: cover;
 }
 .brick {
-  background: transparent url("./images/brick.gif") no-repeat center center;
+  background: transparent url("./images/brick.png") no-repeat center center;
   background-size: cover;
 }
 .wheat {
-  background: transparent url("./images/wheat.gif") no-repeat center center;
+  background: transparent url("./images/wheat.png") no-repeat center center;
   background-size: cover;
 }
 .sheep {
-  background: transparent url("./images/sheep.gif") no-repeat center center;
+  background: transparent url("./images/sheep.png") no-repeat center center;
   background-size: cover;
 }
 .wood {
-  background: transparent url("./images/wood.gif") no-repeat center center;
+  background: transparent url("./images/wood.png") no-repeat center center;
   background-size: cover;
 }
 .ore {
-  background: transparent url("./images/ore.gif") no-repeat center center;
+  background: transparent url("./images/ore.png") no-repeat center center;
   background-size: cover;
 }
 
@@ -160,11 +163,13 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   border:2px solid black;
   z-index:4;
   text-align:center;
-  line-height:3vh;
   font-size:3vh;
-  vertical-align:center;
   font-weight:bold;
   cursor:pointer;
+  transform: rotate(calc(-1*var(--rotation)));
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 .number.robber {
   border:3px solid red;
@@ -178,6 +183,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
 .corner {
   z-index:3;
   cursor:pointer;
+  
 }
 .corner.settlement {
   width: calc(var(--settlement-size));
@@ -200,7 +206,9 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   border-radius:50%;
   background-color:var(--tan);
   opacity:.5;
-  display:none;
+}
+.corner:hover {
+  opacity: .85
 }
 .corner.port {
   border:1px solid #333 !important;
@@ -261,9 +269,6 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
   z-index:2;
   background-color:#666;
 }
-.road.player {
-  height:1.5%;
-}
 
 .road.side-1 {
   transform: rotate(30deg);
@@ -273,12 +278,12 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
 .road.side-2 {
   transform: rotate(90deg);
   margin-left: calc(var(--w)*0.45);
-  margin-top: 0;
+  margin-top: 0px;
 }
 .road.side-3 {
   transform: rotate(150deg);
   margin-left: 0;
-  margin-top: calc(var(--h)*1.5);
+  margin-top: calc(var(--h)*1.4);
 }
 .road.side-4 {
   transform: rotate(210deg);
@@ -288,7 +293,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:black; }
 .road.side-5 {
   transform: rotate(270deg);
   margin-left: calc(var(--w)*-1.55);
-  margin-top: 0;
+  margin-top: 0px;
 }
 .road.side-6 {
   transform: rotate(330deg);
