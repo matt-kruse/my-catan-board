@@ -261,43 +261,48 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 }
 
 /* ROADS */
-
+:root {
+    --road-width:1%;
+}
 .road {
-  width: calc(var(--side));
-  height: 1%;
-  cursor: pointer;
-  z-index:2;
-  background-color:#666;
+    width: calc(var(--side));
+    height: var(--road-width);
+    cursor: pointer;
+    z-index:2;
+    background-color:#666;
+}
+.road.player {
+    height:calc(var(--road-width)*1.5);
 }
 
 .road.side-1 {
-  transform: rotate(30deg);
-  margin-left: 0;
-  margin-top: calc(var(--h)*-1.5);
+    transform: rotate(30deg);
+    margin-left: 0;
+    margin-top: calc(var(--h)*-1.5 - (var(--road-width)/2));
 }
 .road.side-2 {
-  transform: rotate(90deg);
-  margin-left: calc(var(--w)*0.45);
-  margin-top: 0px;
+    transform: rotate(90deg);
+    margin-left: calc(var(--w)*0.5 - (var(--road-width)/2));
+    margin-top: calc(0 + (var(--road-width)/2));
 }
 .road.side-3 {
-  transform: rotate(150deg);
-  margin-left: 0;
-  margin-top: calc(var(--h)*1.4);
+    transform: rotate(150deg);
+    margin-left: 0;
+    margin-top: calc(var(--h)*1.5 - (var(--road-width)/2));
 }
 .road.side-4 {
-  transform: rotate(210deg);
-  margin-left: calc(var(--w)*-1);
-  margin-top: calc(var(--h)*1.5);
+    transform: rotate(210deg);
+    margin-left: calc(var(--w)*-1);
+    margin-top: calc(var(--h)*1.5 - (var(--road-width)/2));
 }
 .road.side-5 {
-  transform: rotate(270deg);
-  margin-left: calc(var(--w)*-1.55);
-  margin-top: 0px;
+    transform: rotate(270deg);
+    margin-left: calc(var(--w)*-1.5 - (var(--road-width)/2));
+    margin-top: calc(0 + (var(--road-width)/2));
 }
 .road.side-6 {
-  transform: rotate(330deg);
-  margin-left: calc(var(--w)*-1);
-  margin-top: calc(var(--h)*-1.6);
+    transform: rotate(330deg);
+    margin-left: calc(var(--w)*-1);
+    margin-top: calc(var(--h)*-1.5 - (var(--road-width)/2));
 }
 
