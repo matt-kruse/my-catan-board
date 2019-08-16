@@ -10,13 +10,13 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   --side: 9.5%;
   --h: calc(var(--side) / 2);
   --w: calc(var(--side) * 0.8660254);
-  --corner-circle-r: 2.4%;
+  --corner-circle-r: 1.7%;
   --number-circle-r: 2.5%;
   --settlement-size: 4%;
   --city-size: 5%;
   --tan: #CEB492;
   /* --rotation: 30deg */
-  --rotation: 0
+  --rotation: 0;
 }
 
 /* A screen layer which will prevent clicks on things that are not active */
@@ -45,12 +45,14 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   position:relative;
   /* background-color:#0196CE; */
   background: transparent url("./images/water.gif") no-repeat center center;
-  overflow:hidden;
   transform: rotate(var(--rotation));
   background-size: contain;
 }
 .board > * {
   position:absolute;
+}
+*:not(html)[mode] {
+    cursor:pointer;
 }
 
 /* COLORS */
@@ -96,7 +98,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 .col-9 { left: calc(50% + (var(--w)*4)); }
 .col-10{ left: calc(50% + (var(--w)*5)); }
 .col-10p5{ left: calc(50% + (var(--w)*5.5)); }
-.col-11{ left: calc(50% + (var(--w)*6) - 2%); }
+.col-11{ left: calc(50% + (var(--w)*6)); }
 
 
 .boat {
@@ -104,10 +106,10 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   height:7%;
   margin-top:-3.5%;
   margin-left:-3.5%;
-  /* opacity: .7; */
+  opacity: .7;
   background:transparent url("./images/boat.gif") no-repeat center center;
   background-size:cover;
-  transform: rotate(calc(-1*var(--rotation)));
+  /* transform: rotate(calc(-1*var(--rotation))); */
   z-index:8;
 }
 
@@ -166,7 +168,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   font-size:3vh;
   font-weight:bold;
   cursor:pointer;
-  transform: rotate(calc(-1*var(--rotation)));
+  /* transform: rotate(calc(-1*var(--rotation))); */
   display: flex;
   justify-content: center;
   align-items: center
@@ -183,12 +185,10 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 .corner {
   z-index:3;
   cursor:pointer;
-  
 }
 .corner.settlement {
   width: calc(var(--settlement-size));
   height: calc(var(--settlement-size));
-  border:1.5px solid black;
 }
 .corner.city {
   width: calc(var(--city-size));
@@ -204,15 +204,18 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   margin-left:calc(var(--corner-circle-r)*-1);
   margin-top:calc(var(--corner-circle-r)*-1);
   border-radius:50%;
-  background-color:var(--tan);
+  /* background-color:var(--tan); */
   opacity:.5;
 }
 .corner:hover {
   opacity: .85
 }
 .corner.port {
-  border:1px solid #333 !important;
+  /* border:1px solid #333 !important; */
+  background-color:var(--tan);
+  opacity:.5 !important;
 }
+
 .corner.port::after {
   width:50%;
   height:10%;
@@ -274,7 +277,6 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 .road.player {
     height:calc(var(--road-width)*1.5);
 }
-
 .road.side-1 {
     transform: rotate(30deg);
     margin-left: 0;
