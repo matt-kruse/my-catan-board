@@ -38,7 +38,7 @@ document.querySelector('#input').addEventListener('click', (e)=>{
   if (msg) {
     setmessage(msg);
   }
-  if (mode) {
+  if (mode!==null) {
     if (typeof handler[mode]==="function") {
       handler[mode](t,mode);
     }
@@ -222,10 +222,12 @@ handler.selectroad = (el)=>{
     clearmode();
     el.classList.add("player");
     el.classList.add("player-red");
-  }
+    clearmessage();
+   }
 };
 handler.selectcorner = (el)=>{
   if (mode==="placesettlement") {
+    clearmode();
     el.classList.add("city");
     el.classList.add("player");
     el.classList.add("player-red");
