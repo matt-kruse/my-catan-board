@@ -49,6 +49,7 @@ document.querySelector('#input').addEventListener('click', (e)=>{
   }
 });
 
+let settlement_index=0;
 function Settlement(board,col,row,cn) {
   this.city = false;
   this.player = null;
@@ -56,6 +57,7 @@ function Settlement(board,col,row,cn) {
   this.dom.className = "corner " + (cn?cn:"");
   this.dom.style=`left:calc(50% + (var(--w)*${col})); top:calc(50% + (var(--h)*${row}));`;
   this.dom.setAttribute('mode','selectcorner');
+  this.dom.setAttribute('index',settlement_index++);
   board.appendChild(this.dom);
 }
 function Road(board,row,col,side) {
@@ -142,10 +144,10 @@ let settlements = [
 i=0;
 let numbers = shuffle([2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12]);
 let resources = shuffle(["wood","wood","wood","wood","sheep","sheep","sheep","sheep","wheat","wheat","wheat","wheat","brick","brick","brick","ore","ore","ore","desert"]);
-function Territory(board,row,col,settlements) {
+function Territory(board,row,col,tsettlements) {
   this.resource = resources.shift();
   this.number = this.resource === "desert" ? null : numbers.shift();
-  this.settlements = settlements.map(i=>settlements[i]);
+  this.settlements = tsettlements.map(i=>settlements[i]);
 
   this.dom_hex = document.createElement('div');
   this.dom_hex.className = `resource ${this.resource} row-${row} col-${col}`;
@@ -229,16 +231,20 @@ handler.selectroad = (el)=>{
    }
 };
 handler.selectcorner = (el)=>{
+  let index = el.getAttribute('index');
+  let settlement = settlements[index];
   if (mode==="placesettlement") {
     clearmode();
     el.classList.add("settlement");
     el.classList.add("player");
     el.classList.add("red");
+    settlement.player = "red";
   }
   if (mode==="placecity") {
     clearmode();
     el.classList.remove("settlement");
     el.classList.add("city");
+    settlement.city = true;
   }
 };
 handler.roll = (el)=>{
@@ -259,10 +265,23 @@ handler.roll = (el)=>{
     setTimeout(()=>{
       button.classList.remove("shake-horizontal");
         // Apply roll to territories
+        let allocations = {};
         territories.forEach(t=>{
           if (t.number === roll || (roll===7 && t.number===null)) {
             t.dom_hex.classList.add("roll-active");
             t.dom_number.classList.add("roll-active");
+
+            // Allocate resource cards
+            t.settlements.forEach(s=>{
+              if (s.player) {
+                if (s.city) {
+                  console.log(`player ${s.player} gets 2 ${t.resource} cards`);
+                }
+                else {
+                  console.log(`player ${s.player} gets 1 ${t.resource} card`);
+                }
+              }
+            });
           }
         });
     },300);
