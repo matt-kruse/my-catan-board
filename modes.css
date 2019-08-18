@@ -1,10 +1,10 @@
 html[mode="placeroad"] .road:not(.player) {
     z-index:101;
-    height:2.5%;
+    height:20%;
     background-color:yellow;
 }
 html[mode="placeroad"] .road:not(.player):hover {
-    border:1px solid black;
+
 }
 
 html[mode="placesettlement"] .corner:not(.settlement):not(.city) {
@@ -19,3 +19,5 @@ html[mode="roll"] .resource, html[mode="roll"] .number {
 html[mode="roll"] .resource.roll-active, html[mode="roll"] .number.roll-active {
     opacity:1;
 }
+
+html[mode]:not([mode=""]) .button-done { display:block; }

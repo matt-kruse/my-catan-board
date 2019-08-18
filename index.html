@@ -3,6 +3,8 @@
 <head>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="modes.css">
+  <link rel="stylesheet" type="text/css" href="dice.css">
+  <link rel="stylesheet" type="text/css" href="css-shake.css">
 </head>
 
 <body>
@@ -30,9 +32,12 @@
     <div class="board">
       <div id="screen"></div>
 
-      <div class="dice button" mode="roll">ROLL DICE</div>
+      <div class="dice-button button" mode="roll">
+        <span class="dice dice-5" mode="roll"></span>
+        <span class="dice dice-5" mode="roll"></span>
+      </div>
       <div class="cancel"></div>
-      <div class="done"></div>
+      <div class="button button-done" mode="">Done</div>
 
       <div class="boat row-0 col-2"></div>
       <div class="boat row-0 col-6"></div>

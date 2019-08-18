@@ -77,9 +77,18 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
     height:calc(var(--side)*.5);
     z-index:101;
 }
-.dice {
+.dice-button {
     top:0;
     right:0;
+}
+.dice {
+    margin:0 !important;
+    padding:0;
+}
+.button-done {
+    left:0;
+    bottom:0;
+    display:none;
 }
 
 *:not(html)[mode] {

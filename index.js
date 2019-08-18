@@ -237,11 +237,26 @@ handler.roll = (el)=>{
   Array.from(document.querySelectorAll('.roll-active')).forEach(a=>{
     a.classList.remove("roll-active");
   });
-  let roll = Math.ceil(Math.random()*11)+1;
-  territories.forEach(t=>{
-    if (t.number === roll || (roll===7 && t.number===null)) {
-      t.dom_hex.classList.add("roll-active");
-      t.dom_number.classList.add("roll-active");
-    }
+  let button = document.querySelector('.dice-button');
+  button.classList.add('shake-horizontal');
+  let roll = 0;
+  // Update dice
+  Array.from(document.querySelectorAll('.dice')).forEach(d=>{
+    d.className="dice";
+    let r = Math.ceil(Math.random()*5)+1;
+    roll += r;
+    d.classList.add("dice-"+r);
   });
+
+    setTimeout(()=>{
+      button.classList.remove("shake-horizontal");
+        // Apply roll to territories
+        territories.forEach(t=>{
+          if (t.number === roll || (roll===7 && t.number===null)) {
+            t.dom_hex.classList.add("roll-active");
+            t.dom_number.classList.add("roll-active");
+          }
+        });
+    },300);
+
 };
