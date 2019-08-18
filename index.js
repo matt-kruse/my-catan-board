@@ -153,6 +153,9 @@ function Territory(board,row,col,settlements) {
 
   this.dom_number = document.createElement('DIV');
   this.dom_number.className = `number row-${row} col-${col}`;
+  if (this.number === 6 || this.number === 8) {
+    this.dom_number.classList.add('number-red');
+  }
   if ("desert"===this.resource) {
     this.dom_number.className += " robber";
     this.dom_hex.className += " robber";
@@ -228,9 +231,14 @@ handler.selectroad = (el)=>{
 handler.selectcorner = (el)=>{
   if (mode==="placesettlement") {
     clearmode();
-    el.classList.add("city");
+    el.classList.add("settlement");
     el.classList.add("player");
-    el.classList.add("player-red");
+    el.classList.add("red");
+  }
+  if (mode==="placecity") {
+    clearmode();
+    el.classList.remove("settlement");
+    el.classList.add("city");
   }
 };
 handler.roll = (el)=>{

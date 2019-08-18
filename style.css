@@ -215,6 +215,9 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   justify-content: center;
   align-items: center
 }
+.number-red {
+    color:red;
+}
 .number.robber {
   border:3px solid red;
   color:black;
@@ -231,16 +234,48 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 .corner.settlement {
   width: calc(var(--settlement-size));
   height: calc(var(--settlement-size));
+    margin-left: calc(var(--settlement-size)*-0.5);
+    margin-top: calc(var(--settlement-size)*-0.5);
   opacity:1;
+}
+.corner.settlement.red {
+    background: transparent url("./images/red_settlement.png") no-repeat center center;
+    background-size: cover;
+}
+.corner.settlement.white {
+    background: transparent url("./images/white_settlement.png") no-repeat center center;
+    background-size: cover;
+}
+.corner.settlement.blue {
+    background: transparent url("./images/blue_settlement.png") no-repeat center center;
+    background-size: cover;
+}
+.corner.settlement.orange {
+    background: transparent url("./images/orange_settlement.png") no-repeat center center;
+    background-size: cover;
 }
 .corner.city {
   width: calc(var(--city-size));
   height: calc(var(--city-size));
   margin-left: calc(var(--city-size)*-0.5);
   margin-top: calc(var(--city-size)*-0.5);
-  background:transparent url("./images/city-red.gif") no-repeat center center;
-  background-size:cover;
   opacity:1;
+}
+.corner.city.red {
+    background: transparent url("./images/red_city.png") no-repeat center center;
+    background-size: cover;
+}
+.corner.city.white {
+    background: transparent url("./images/white_city.png") no-repeat center center;
+    background-size: cover;
+}
+.corner.city.blue {
+    background: transparent url("./images/blue_city.png") no-repeat center center;
+    background-size: cover;
+}
+.corner.city.orange {
+    background: transparent url("./images/orange_city.png") no-repeat center center;
+    background-size: cover;
 }
 .corner:not(.settlement):not(.city) {
   width: calc(var(--corner-circle-r)*2);

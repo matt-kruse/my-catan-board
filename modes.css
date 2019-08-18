@@ -1,6 +1,6 @@
 html[mode="placeroad"] .road:not(.player) {
     z-index:101;
-    height:20%;
+    height:2%;
     background-color:yellow;
 }
 html[mode="placeroad"] .road:not(.player):hover {
@@ -8,6 +8,11 @@ html[mode="placeroad"] .road:not(.player):hover {
 }
 
 html[mode="placesettlement"] .corner:not(.settlement):not(.city) {
+    z-index:101;
+    background-color:yellow;
+    display:block;
+}
+html[mode="placecity"] .corner.settlement:not(.city) {
     z-index:101;
     background-color:yellow;
     display:block;
