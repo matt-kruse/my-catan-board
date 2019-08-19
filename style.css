@@ -105,7 +105,6 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 /* PLAYER PANELS */
 .player-panel {
   width:200px;
-  height:30vh;
   border:10px solid black;
   border-radius:20px;
   background-color:#2C2C2C;
@@ -121,6 +120,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
     margin:4px;
     padding:5px;
     color:white;
+    height:5vh;
 }
 
 /* GRID / PLACEMENT */
