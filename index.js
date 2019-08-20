@@ -2,6 +2,7 @@ let mode = null;
 let html = document.querySelector('html');
 let message = document.querySelector('.message');
 let handler = {};
+let active_color = null;
 
 function setmode(m) {
   mode = m;
@@ -31,22 +32,25 @@ function shuffle(a) {
 
 document.querySelector('#input').addEventListener('click', (e)=>{
   e.stopPropagation();
-	let sel,t = e.target;
-  if ("screen"===t.id || "input"===t.id) { return; }
-  let mode = t.getAttribute('mode');
-  let msg = t.getAttribute('message');
-  if (msg) {
-    setmessage(msg);
+	let mode,msg,t = e.target;
+	if ("screen"===t.id || "input"===t.id) { return; }
+  while (t && t.tagName!=="BODY") {
+    mode = t.getAttribute('mode');
+    msg = t.getAttribute('message');
+    if (mode || msg) { break; }
+    t = t.parentNode;
   }
-  if (mode!==null) {
-    if (typeof handler[mode]==="function") {
-      handler[mode](t,mode);
+    if (msg) {
+      setmessage(msg);
     }
-    setmode(mode);
-  }
-  else {
-    clearmode();
-  }
+    if (mode !== null) {
+      if (typeof handler[mode] === "function") {
+        handler[mode](t, mode);
+      }
+      setmode(mode);
+    } else {
+      clearmode();
+    }
 });
 
 let settlement_index=0;
@@ -222,6 +226,9 @@ roads.push(new Road(board,5,7,4));
 let ports = [new Port("31"), new Port("31"), new Port("31"), new Port("31"), new Port("wheat"), new Port("sheep"), new Port("ore"), new Port("wood"), new Port("brick")];
 
 // Click Handlers
+handler.placesettlement = (el)=>{
+  active_color = el.getAttribute('color');
+};
 handler.selectroad = (el)=>{
   if (mode==="placeroad") {
     clearmode();
@@ -237,8 +244,8 @@ handler.selectcorner = (el)=>{
     clearmode();
     el.classList.add("settlement");
     el.classList.add("player");
-    el.classList.add("red");
-    settlement.player = "red";
+    el.classList.add(active_color);
+    settlement.player = active_color;
   }
   if (mode==="placecity") {
     clearmode();

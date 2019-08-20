@@ -109,6 +109,9 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   border-radius:20px;
   background-color:#2C2C2C;
   position:absolute;
+  font-family:sans-serif;
+  color:white;
+    font-weight:bold;
 }
 
 .player-panel.top { top:0; }
@@ -122,6 +125,46 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
     color:white;
     height:5vh;
 }
+.player-panel > div:hover {
+    box-shadow:0 0 10px yellow;
+}
+.player-panel .road {
+    height:25% !important;
+    width:50%;
+}
+.player-panel .road.red { background-color:red; }
+.player-panel .road.white { background-color:white; }
+.player-panel .road.blue { background-color:blue; }
+.player-panel .road.orange { background-color:orange; }
+
+.player-panel .count {
+    float:right;
+    height:4vh;
+    font-size:4.5vh;
+    margin-right:1vh;
+}
+.player-panel .label {
+    font-size:2.5vh;
+}
+.player-panel .settlement {
+    height:2.5vh;
+    width:2.5vh;
+    background:transparent url('./images/settlement-red.svg') no-repeat center center;
+    background-size: cover;
+}
+.player-panel .settlement.white { background-image:url('./images/settlement-white.svg'); }
+.player-panel .settlement.blue { background-image:url('./images/settlement-blue.svg'); }
+.player-panel .settlement.orange { background-image:url('./images/settlement-orange.svg'); }
+
+.player-panel .city {
+    height:2.5vh;
+    width:2.5vh;
+    background: transparent url("./images/city-red.svg") no-repeat center center;
+    background-size: cover;
+}
+.player-panel .city.white { background-image:url('./images/city-white.svg'); }
+.player-panel .city.blue { background-image:url('./images/city-blue.svg'); }
+.player-panel .city.orange { background-image:url('./images/city-orange.svg'); }
 
 /* GRID / PLACEMENT */
 
@@ -239,19 +282,19 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   opacity:1;
 }
 .corner.settlement.red {
-    background: transparent url("./images/red_settlement.png") no-repeat center center;
+    background: transparent url("./images/settlement-red.svg") no-repeat center center;
     background-size: cover;
 }
 .corner.settlement.white {
-    background: transparent url("./images/white_settlement.png") no-repeat center center;
+    background: transparent url("./images/settlement-white.svg") no-repeat center center;
     background-size: cover;
 }
 .corner.settlement.blue {
-    background: transparent url("./images/blue_settlement.png") no-repeat center center;
+    background: transparent url("./images/settlement-blue.svg") no-repeat center center;
     background-size: cover;
 }
 .corner.settlement.orange {
-    background: transparent url("./images/orange_settlement.png") no-repeat center center;
+    background: transparent url("./images/settlement-orange.svg") no-repeat center center;
     background-size: cover;
 }
 .corner.city {
@@ -262,19 +305,19 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   opacity:1;
 }
 .corner.city.red {
-    background: transparent url("./images/red_city.png") no-repeat center center;
+    background: transparent url("./images/city-red.svg") no-repeat center center;
     background-size: cover;
 }
 .corner.city.white {
-    background: transparent url("./images/white_city.png") no-repeat center center;
+    background: transparent url("./images/city-white.svg") no-repeat center center;
     background-size: cover;
 }
 .corner.city.blue {
-    background: transparent url("./images/blue_city.png") no-repeat center center;
+    background: transparent url("./images/city-blue.svg") no-repeat center center;
     background-size: cover;
 }
 .corner.city.orange {
-    background: transparent url("./images/orange_city.png") no-repeat center center;
+    background: transparent url("./images/city-orange.svg") no-repeat center center;
     background-size: cover;
 }
 .corner:not(.settlement):not(.city) {
