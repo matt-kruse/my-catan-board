@@ -244,9 +244,6 @@ handler.selectroad = (el)=>{
     clearmessage();
    }
 };
-handler.moverobber = el=>{
-  el.classList.remove('robber');
-};
 handler.selectnumber = (el)=>{
   if (el.classList.contains('robber')) {
     return "moverobber";
@@ -292,28 +289,58 @@ handler.roll = (el)=>{
     d.classList.add("dice-"+r);
   });
 
-    setTimeout(()=>{
-      button.classList.remove("shake-horizontal");
-        // Apply roll to territories
-        let allocations = {};
-        territories.forEach(t=>{
-          if (t.number === roll || (roll===7 && t.number===null)) {
-            t.dom_hex.classList.add("roll-active");
-            t.dom_number.classList.add("roll-active");
+  // Remove all other classes
+  Array.from(document.querySelectorAll('.card')).forEach(c=>{
+    c.className="card";
+    c.innerText="";
+  });
 
-            // Allocate resource cards
-            t.settlements.forEach(s=>{
-              if (s.player) {
-                if (s.city) {
-                  console.log(`player ${s.player} gets 2 ${t.resource} cards`);
-                }
-                else {
-                  console.log(`player ${s.player} gets 1 ${t.resource} card`);
-                }
-              }
-            });
+  setTimeout(()=>{
+    button.classList.remove("shake-horizontal");
+    if (roll===7) {
+      return setmode("moverobber");
+    }
+    // Apply roll to territories
+    let allocations = {};
+    territories.forEach(t=>{
+      if (t.number === roll || (roll===7 && t.dom_hex.classList.contains('robber'))) {
+        t.dom_hex.classList.add("roll-active");
+        t.dom_number.classList.add("roll-active");
+
+        // Allocate resource cards
+        t.settlements.forEach(s=>{
+          if (!allocations[t.resource]) {
+            allocations[t.resource] = {"red":0,"white":0,"blue":0,"orange":0};
+          }
+          if (s.player && !t.dom_hex.classList.contains('robber')) {
+            if (s.city) {
+              allocations[t.resource][s.player]+=2;
+            }
+            else {
+              allocations[t.resource][s.player]++;
+            }
           }
         });
-    },300);
+      }
+    });
+
+    // Update cards
+    let resource;
+    let a,p,card = 0;
+    for (resource in allocations) {
+      if (resource==="desert") { continue; }
+      a=allocations[resource];
+      for (p in a) {
+        let selector = `.player-panel-${p} .card`;
+        let c = document.querySelectorAll(selector)[card];
+        c.classList.add(resource);
+        if (a[p]>0) {
+          c.innerText = a[p];
+        }
+      }
+      card++;
+    }
+
+  },300);
 
 };

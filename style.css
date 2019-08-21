@@ -111,14 +111,14 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 .player-panel.left { left:0; }
 .player-panel.bottom { bottom:0; }
 .player-panel.right { right:0; }
-.player-panel > div {
+.player-panel .pieces > div {
     border:1px solid #ddd;
     margin:4px;
     padding:5px;
     color:white;
     height:5vh;
 }
-.player-panel > div:hover {
+.player-panel >.pieces > div:hover {
     box-shadow:0 0 10px yellow;
 }
 .player-panel .road {
@@ -158,6 +158,20 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 .player-panel .city.white { background-image:url('./images/city-white.svg'); }
 .player-panel .city.blue { background-image:url('./images/city-blue.svg'); }
 .player-panel .city.orange { background-image:url('./images/city-orange.svg'); }
+
+.player-panel .cards {
+    display:none;
+}
+.player-panel .card {
+    height: 20vh;
+    background-size:contain;
+    text-align:center;
+    font-size:10vh;
+    font-weight:bold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
 /* GRID / PLACEMENT */
 

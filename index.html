@@ -11,71 +11,98 @@
   <div id="input">
 
     <div class="player-panel player-panel-red bottom right" style="border-color:red;">
-      <div mode="placeroad" color="red" message="Select a location to place your road">
-        <div class="count">00</div>
-        <div class="road player red"></div>
-        <div class="label">Road</div>
+      <div class="pieces">
+        <div mode="placeroad" color="red" message="Select a location to place your road">
+          <div class="count">00</div>
+          <div class="road player red"></div>
+          <div class="label">Road</div>
+        </div>
+        <div mode="placesettlement" color="red" message="Select a location to place your settlement">
+          <div class="count">00</div>
+          <div class="settlement player red"></div>
+          <div class="label">Settlement</div>
+        </div>
+        <div mode="placecity" color="red" message="Select a settlement to upgrade to a city">
+          <div class="count">00</div>
+          <div class="city player red"></div>
+          <div class="label">City</div>
+        </div>
       </div>
-      <div mode="placesettlement" color="red" message="Select a location to place your settlement">
-        <div class="count">00</div>
-        <div class="settlement player red"></div>
-        <div class="label">Settlement</div>
-      </div>
-      <div mode="placecity" color="red" message="Select a settlement to upgrade to a city">
-        <div class="count">00</div>
-        <div class="city player red"></div>
-        <div class="label">City</div>
+      <div class="cards">
+        <div class="card"></div>
+        <div class="card"></div>
       </div>
     </div>
+
     <div class="player-panel player-panel-white top right" style="border-color:white;">
-      <div mode="placeroad" color="white" message="Select a location to place your road">
-        <div class="count">00</div>
-        <div class="road player white"></div>
-        <div class="label">Road</div>
+      <div class="pieces">
+        <div mode="placeroad" color="white" message="Select a location to place your road">
+          <div class="count">00</div>
+          <div class="road player white"></div>
+          <div class="label">Road</div>
+        </div>
+        <div mode="placesettlement" color="white" message="Select a location to place your settlement">
+          <div class="count">00</div>
+          <div class="settlement player white"></div>
+          <div class="label">Settlement</div>
+        </div>
+        <div mode="placecity" color="white" message="Select a settlement to upgrade to a city">
+          <div class="count">00</div>
+          <div class="city player white"></div>
+          <div class="label">City</div>
+        </div>
       </div>
-      <div mode="placesettlement" color="white" message="Select a location to place your settlement">
-        <div class="count">00</div>
-        <div class="settlement player white"></div>
-        <div class="label">Settlement</div>
-      </div>
-      <div mode="placecity" color="white" message="Select a settlement to upgrade to a city">
-        <div class="count">00</div>
-        <div class="city player white"></div>
-        <div class="label">City</div>
+      <div class="cards">
+        <div class="card"></div>
+        <div class="card"></div>
       </div>
     </div>
+
     <div class="player-panel player-panel-blue bottom left" style="border-color:blue;">
-      <div mode="placeroad" color="blue" message="Select a location to place your road">
-        <div class="count">00</div>
-        <div class="road player blue"></div>
-        <div class="label">Road</div>
+      <div class="pieces">
+        <div mode="placeroad" color="blue" message="Select a location to place your road">
+          <div class="count">00</div>
+          <div class="road player blue"></div>
+          <div class="label">Road</div>
+        </div>
+        <div mode="placesettlement" color="blue" message="Select a location to place your settlement">
+          <div class="count">00</div>
+          <div class="settlement player blue"></div>
+          <div class="label">Settlement</div>
+        </div>
+        <div mode="placecity" color="blue" message="Select a settlement to upgrade to a city">
+          <div class="count">00</div>
+          <div class="city player blue"></div>
+          <div class="label">City</div>
+        </div>
       </div>
-      <div mode="placesettlement" color="blue" message="Select a location to place your settlement">
-        <div class="count">00</div>
-        <div class="settlement player blue"></div>
-        <div class="label">Settlement</div>
-      </div>
-      <div mode="placecity" color="blue" message="Select a settlement to upgrade to a city">
-        <div class="count">00</div>
-        <div class="city player blue"></div>
-        <div class="label">City</div>
+      <div class="cards">
+        <div class="card"></div>
+        <div class="card"></div>
       </div>
     </div>
+
     <div class="player-panel player-panel-orange top left" style="border-color:orange;">
-      <div mode="placeroad" color="orange" message="Select a location to place your road">
-        <div class="count">00</div>
-        <div class="road player orange"></div>
-        <div class="label">Road</div>
+      <div class="pieces">
+        <div mode="placeroad" color="orange" message="Select a location to place your road">
+          <div class="count">00</div>
+          <div class="road player orange"></div>
+          <div class="label">Road</div>
+        </div>
+        <div mode="placesettlement" color="orange" message="Select a location to place your settlement">
+          <div class="count">00</div>
+          <div class="settlement player orange"></div>
+          <div class="label">Settlement</div>
+        </div>
+        <div mode="placecity" color="orange" message="Select a settlement to upgrade to a city">
+          <div class="count">00</div>
+          <div class="city player orange"></div>
+          <div class="label">City</div>
+        </div>
       </div>
-      <div mode="placesettlement" color="orange" message="Select a location to place your settlement">
-        <div class="count">00</div>
-        <div class="settlement player orange"></div>
-        <div class="label">Settlement</div>
-      </div>
-      <div mode="placecity" color="orange" message="Select a settlement to upgrade to a city">
-        <div class="count">00</div>
-        <div class="city player orange"></div>
-        <div class="label">City</div>
+      <div class="cards">
+        <div class="card"></div>
+        <div class="card"></div>
       </div>
     </div>
 
@@ -84,8 +111,8 @@
       <div id="screen"></div>
 
       <div class="dice-button button" mode="roll">
-        <span class="dice dice-5" mode="roll"></span>
-        <span class="dice dice-5" mode="roll"></span>
+        <span class="dice dice-5"></span>
+        <span class="dice dice-5"></span>
       </div>
       <div class="cancel"></div>
       <div class="button button-done" mode="" message="">Done</div>
