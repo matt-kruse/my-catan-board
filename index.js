@@ -32,20 +32,28 @@ function shuffle(a) {
 
 document.querySelector('#input').addEventListener('click', (e)=>{
   e.stopPropagation();
-	let mode,msg,t = e.target;
+	let c,mode,msg,t = e.target;
 	if ("screen"===t.id || "input"===t.id) { return; }
   while (t && t.tagName!=="BODY") {
     mode = t.getAttribute('mode');
     msg = t.getAttribute('message');
+    c = t.getAttribute('color');
     if (mode || msg) { break; }
     t = t.parentNode;
   }
     if (msg) {
       setmessage(msg);
     }
+    if (c) {
+      active_color = c;
+    }
     if (mode !== null) {
+
       if (typeof handler[mode] === "function") {
-        handler[mode](t, mode);
+        let newmode = handler[mode](t, mode);
+        if (typeof newmode==="string") {
+          mode = newmode;
+        }
       }
       setmode(mode);
     } else {
@@ -148,6 +156,7 @@ let settlements = [
 i=0;
 let numbers = shuffle([2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12]);
 let resources = shuffle(["wood","wood","wood","wood","sheep","sheep","sheep","sheep","wheat","wheat","wheat","wheat","brick","brick","brick","ore","ore","ore","desert"]);
+let t_num=0;
 function Territory(board,row,col,tsettlements) {
   this.resource = resources.shift();
   this.number = this.resource === "desert" ? null : numbers.shift();
@@ -159,6 +168,7 @@ function Territory(board,row,col,tsettlements) {
 
   this.dom_number = document.createElement('DIV');
   this.dom_number.className = `number row-${row} col-${col}`;
+  this.dom_number.setAttribute('mode','selectnumber');
   if (this.number === 6 || this.number === 8) {
     this.dom_number.classList.add('number-red');
   }
@@ -226,16 +236,29 @@ roads.push(new Road(board,5,7,4));
 let ports = [new Port("31"), new Port("31"), new Port("31"), new Port("31"), new Port("wheat"), new Port("sheep"), new Port("ore"), new Port("wood"), new Port("brick")];
 
 // Click Handlers
-handler.placesettlement = (el)=>{
-  active_color = el.getAttribute('color');
-};
 handler.selectroad = (el)=>{
   if (mode==="placeroad") {
     clearmode();
     el.classList.add("player");
-    el.classList.add("player-red");
+    el.classList.add(active_color);
     clearmessage();
    }
+};
+handler.moverobber = el=>{
+  el.classList.remove('robber');
+};
+handler.selectnumber = (el)=>{
+  if (el.classList.contains('robber')) {
+    return "moverobber";
+  }
+  else if (mode==='moverobber') {
+    document.querySelector('.number.robber').classList.remove('robber');
+    document.querySelector('.resource.robber').classList.remove('robber');
+    territories.filter((t) => t.dom_number === el).forEach(t => {
+      t.dom_number.classList.add('robber');
+      t.dom_hex.classList.add("robber");
+    });
+  }
 };
 handler.selectcorner = (el)=>{
   let index = el.getAttribute('index');

@@ -95,13 +95,6 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
     cursor:pointer;
 }
 
-/* COLORS */
-
-.player-red { background-color: red !important; }
-.player-blue { background-color: blue !important; }
-.player-white { background-color: white !important; }
-.player-orange { background-color: orange !important; }
-
 /* PLAYER PANELS */
 .player-panel {
   width:200px;
@@ -144,7 +137,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
     margin-right:1vh;
 }
 .player-panel .label {
-    font-size:2.5vh;
+    font-size:2vh;
 }
 .player-panel .settlement {
     height:2.5vh;
@@ -266,6 +259,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   color:black;
   background:white url("./images/robber.gif") no-repeat center center;
   background-size:cover;
+    z-index:101;
 }
 
 /* CORNERS */
@@ -399,19 +393,24 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 .road.player {
     height:calc(var(--road-width)*1.5);
 }
+.road.player.red { background-color: red !important; }
+.road.player.blue { background-color: blue !important; }
+.road.player.white { background-color: white !important; }
+.road.player.orange { background-color: orange !important; }
+
 .road.side-1 {
     transform: rotate(30deg);
-    margin-left: 0;
+    margin-left: -5px;
     margin-top: calc(var(--h)*-1.5 - (var(--road-width)/2));
 }
 .road.side-2 {
     transform: rotate(90deg);
     margin-left: calc(var(--w)*0.5 - (var(--road-width)/2));
-    margin-top: calc(0 + (var(--road-width)/2));
+    margin-top: calc(-10px + (var(--road-width)/2));
 }
 .road.side-3 {
     transform: rotate(150deg);
-    margin-left: 0;
+    margin-left: -5px;
     margin-top: calc(var(--h)*1.5 - (var(--road-width)/2));
 }
 .road.side-4 {
@@ -426,7 +425,7 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 }
 .road.side-6 {
     transform: rotate(330deg);
-    margin-left: calc(var(--w)*-1);
+    margin-left: calc(var(--w)*-1.1);
     margin-top: calc(var(--h)*-1.5 - (var(--road-width)/2));
 }
 

@@ -18,6 +18,11 @@ html[mode="placecity"] .corner.settlement:not(.city) {
     display:block;
 }
 
+html[mode="moverobber"] .number:not(.robber) {
+    z-index:101;
+    background-color:yellow;
+}
+
 html[mode="roll"] .resource, html[mode="roll"] .number {
     opacity:.3;
 }
