@@ -287,7 +287,8 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   height: calc(var(--settlement-size));
     margin-left: calc(var(--settlement-size)*-0.5);
     margin-top: calc(var(--settlement-size)*-0.5);
-  opacity:1;
+  opacity:1 !important;
+    border:none !important;
 }
 .corner.settlement.red {
     background: transparent url("./images/settlement-red.svg") no-repeat center center;
@@ -310,7 +311,8 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   height: calc(var(--city-size));
   margin-left: calc(var(--city-size)*-0.5);
   margin-top: calc(var(--city-size)*-0.5);
-  opacity:1;
+  opacity:1 !important;
+    border:none !important;
 }
 .corner.city.red {
     background: transparent url("./images/city-red.svg") no-repeat center center;
@@ -341,9 +343,9 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   opacity: .85
 }
 .corner.port {
-  /* border:1px solid #333 !important; */
+  border:2px solid #555;
   background-color:var(--tan);
-  opacity:.5 !important;
+  opacity:.4;
 }
 
 .corner.port::after {

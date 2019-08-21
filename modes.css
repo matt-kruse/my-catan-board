@@ -11,10 +11,31 @@ html[mode="placesettlement"] .corner:not(.settlement):not(.city) {
     z-index:101;
     background-color:yellow;
     display:block;
+    opacity:.6 !important;
 }
-html[mode="placecity"] .corner.settlement:not(.city) {
+
+html[mode="placecity"][color="red"] .corner.red.settlement:not(.city) {
     z-index:101;
     background-color:yellow;
+    border:2px solid yellow;
+    display:block;
+}
+html[mode="placecity"][color="white"] .corner.white.settlement:not(.city) {
+    z-index:101;
+    background-color:yellow;
+    border:2px solid yellow;
+    display:block;
+}
+html[mode="placecity"][color="blue"] .corner.blue.settlement:not(.city) {
+    z-index:101;
+    background-color:yellow;
+    border:2px solid yellow;
+    display:block;
+}
+html[mode="placecity"][color="orange"] .corner.orange.settlement:not(.city) {
+    z-index:101;
+    background-color:yellow;
+    border:2px solid yellow;
     display:block;
 }
 

@@ -3,7 +3,14 @@ let html = document.querySelector('html');
 let message = document.querySelector('.message');
 let handler = {};
 let active_color = null;
-
+let colors=["red","white","blue","orange"];
+function update_piece_counts() {
+  colors.forEach(c=>{
+    document.querySelector(`.player-panel-${c} .pieces div[mode="placeroad"] .count`).innerText = 15 - document.querySelectorAll(`.board .road.${c}`).length;
+    document.querySelector(`.player-panel-${c} .pieces div[mode="placesettlement"] .count`).innerText = 5 - document.querySelectorAll(`.board .settlement.${c}`).length;
+    document.querySelector(`.player-panel-${c} .pieces div[mode="placecity"] .count`).innerText = 4 - document.querySelectorAll(`.board .city.${c}`).length;
+  });
+}
 function setmode(m) {
   mode = m;
   html.setAttribute('mode',m);
@@ -20,6 +27,10 @@ function clearmessage() {
 function setmessage(msg) {
   message.innerHTML = msg;
   message.style.display="block";
+}
+function setcolor(c) {
+  active_color = c;
+  html.setAttribute('color',c);
 }
 
 function shuffle(a) {
@@ -44,6 +55,9 @@ document.querySelector('#input').addEventListener('click', (e)=>{
     if (msg) {
       setmessage(msg);
     }
+    else {
+      clearmessage();
+    }
     if (c) {
       active_color = c;
     }
@@ -51,11 +65,16 @@ document.querySelector('#input').addEventListener('click', (e)=>{
 
       if (typeof handler[mode] === "function") {
         let newmode = handler[mode](t, mode);
-        if (typeof newmode==="string") {
+        if (typeof newmode==="string" || newmode===null) {
           mode = newmode;
         }
       }
-      setmode(mode);
+      if (mode) {
+        setmode(mode);
+      }
+      else {
+        clearmode();
+      }
     } else {
       clearmode();
     }
@@ -235,14 +254,40 @@ roads.push(new Road(board,5,7,4));
 // Create ports
 let ports = [new Port("31"), new Port("31"), new Port("31"), new Port("31"), new Port("wheat"), new Port("sheep"), new Port("ore"), new Port("wood"), new Port("brick")];
 
+// Update piece counts
+update_piece_counts();
+function available(el) {
+  return +el.querySelector('.count').innerText;
+}
+
 // Click Handlers
 handler.selectroad = (el)=>{
   if (mode==="placeroad") {
     clearmode();
     el.classList.add("player");
     el.classList.add(active_color);
+    update_piece_counts();
     clearmessage();
    }
+};
+handler.placesettlement = (el)=> {
+  if (available(el) === 0) {
+    setmessage("No settlements left!");
+    return "";
+  }
+};
+handler.placeroad = (el)=> {
+  if (available(el) === 0) {
+    setmessage("No roads left!");
+    return "";
+  }
+};
+handler.placecity = (el)=>{
+  if (available(el)===0) {
+    setmessage("No cities left!");
+    return "";
+  }
+  setcolor(el.getAttribute('color'));
 };
 handler.selectnumber = (el)=>{
   if (el.classList.contains('robber')) {
@@ -266,12 +311,14 @@ handler.selectcorner = (el)=>{
     el.classList.add("player");
     el.classList.add(active_color);
     settlement.player = active_color;
+    update_piece_counts();
   }
   if (mode==="placecity") {
     clearmode();
     el.classList.remove("settlement");
     el.classList.add("city");
     settlement.city = true;
+    update_piece_counts();
   }
 };
 handler.roll = (el)=>{
@@ -298,6 +345,7 @@ handler.roll = (el)=>{
   setTimeout(()=>{
     button.classList.remove("shake-horizontal");
     if (roll===7) {
+      setmessage("Move the robber");
       return setmode("moverobber");
     }
     // Apply roll to territories
