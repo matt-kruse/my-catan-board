@@ -128,6 +128,10 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
 .button-remove {
     right:0;
     bottom:0;
+    color:red;
+    font-family:sans-serif;
+    font-weight:bold;
+    padding:3px 15px;
 }
 
 *:not(html)[mode] {
