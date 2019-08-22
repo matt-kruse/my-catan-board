@@ -1,3 +1,6 @@
+html[mode="welcome"] .welcome {
+    display:block;
+}
 html[mode="placeroad"] .road:not(.player) {
     z-index:101;
     height:2%;

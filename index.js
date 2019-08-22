@@ -251,8 +251,14 @@ roads.push(new Road(board,5,5,3));
 roads.push(new Road(board,5,5,4));
 roads.push(new Road(board,5,7,4));
 
-// Create ports
-let ports = [new Port("31"), new Port("31"), new Port("31"), new Port("31"), new Port("wheat"), new Port("sheep"), new Port("ore"), new Port("wood"), new Port("brick")];
+// Create boats
+let ports = shuffle([null,null,null,null,"wheat","sheep","ore","wood","brick"]);
+Array.from(document.querySelectorAll('.boat')).forEach(b=>{
+  let p = ports.shift();
+  if (p) {
+    b.classList.add(`boat-${p}`);
+  }
+});
 
 // Update piece counts
 update_piece_counts();
@@ -261,6 +267,9 @@ function available(el) {
 }
 
 // Click Handlers
+handler.start = ()=>{
+  window.location.hash = "skipwelcome";
+};
 handler.selectroad = (el)=>{
   if (mode==="placeroad") {
     clearmode();
@@ -392,3 +401,8 @@ handler.roll = (el)=>{
   },300);
 
 };
+
+// Welcome
+if ("#skipwelcome"!==window.location.hash) {
+  setmode("welcome");
+}

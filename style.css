@@ -19,6 +19,34 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   --rotation: 0;
 }
 
+.title {
+    font-size:2vh;
+    color:#ccc;
+    font-family:sans-serif;
+    position:absolute;
+    width:100vw;
+    text-align:center;
+}
+.welcome {
+    display:none;
+    width:85vw;
+    height:85vh;
+    border:5px solid white;
+    border-radius:20px;
+    background-color:black;
+    color:#eee;
+    padding:10px;
+    font-size:5vh;
+    position:absolute;
+    top:5vh;
+    left:5vw;
+    z-index:9999;
+    font-family:sans-serif;
+}
+.welcome .button {
+    display:inline-block;
+    font-weight:bold;
+}
 /* A screen layer which will prevent clicks on things that are not active */
 #screen {
   position:absolute;
@@ -76,6 +104,8 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
     font-size:4vh;
     height:calc(var(--side)*.5);
     z-index:101;
+    color:black;
+    font-family:sans-serif;
 }
 .dice-button {
     top:0;
@@ -166,8 +196,14 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
     height: 20vh;
     background-size:contain;
     text-align:center;
-    font-size:10vh;
+    font-size:12vh;
     font-weight:bold;
+    color:white;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -204,12 +240,17 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
   height:7%;
   margin-top:-3.5%;
   margin-left:-3.5%;
-  opacity: .7;
-  background:transparent url("./images/boat.gif") no-repeat center center;
+  opacity: .9;
+  background:transparent url("./images/boat.png") no-repeat center center;
   background-size:cover;
   /* transform: rotate(calc(-1*var(--rotation))); */
   z-index:8;
 }
+.boat-wheat { background-image:url("./images/boat-wheat.png"); }
+.boat-ore { background-image:url("./images/boat-ore.png"); }
+.boat-wood { background-image:url("./images/boat-wood.png"); }
+.boat-brick { background-image:url("./images/boat-brick.png"); }
+.boat-sheep { background-image:url("./images/boat-sheep.png"); }
 
 /* RESOURCES */
 .resource {
