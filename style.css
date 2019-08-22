@@ -125,6 +125,10 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
     bottom:0;
     display:none;
 }
+.button-remove {
+    right:0;
+    bottom:0;
+}
 
 *:not(html)[mode] {
     cursor:pointer;

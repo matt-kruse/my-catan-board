@@ -278,6 +278,16 @@ handler.selectroad = (el)=>{
     update_piece_counts();
     clearmessage();
    }
+  if (mode==="remove") {
+    clearmode();
+    el.classList.remove("player");
+    el.classList.remove("red");
+    el.classList.remove("white");
+    el.classList.remove("blue");
+    el.classList.remove("orange");
+    update_piece_counts();
+    clearmessage();
+  }
 };
 handler.placesettlement = (el)=> {
   if (available(el) === 0) {
@@ -314,6 +324,19 @@ handler.selectnumber = (el)=>{
 handler.selectcorner = (el)=>{
   let index = el.getAttribute('index');
   let settlement = settlements[index];
+  if (mode==="remove") {
+    clearmode();
+    el.classList.remove("settlement");
+    el.classList.remove("city");
+    el.classList.remove("player");
+    el.classList.remove("red");
+    el.classList.remove("white");
+    el.classList.remove("blue");
+    el.classList.remove("orange");
+    settlement.player = null;
+    settlement.city = false;
+    update_piece_counts();
+  }
   if (mode==="placesettlement") {
     clearmode();
     el.classList.add("settlement");

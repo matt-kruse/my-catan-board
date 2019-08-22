@@ -6,8 +6,21 @@ html[mode="placeroad"] .road:not(.player) {
     height:2%;
     background-color:yellow;
 }
+html[mode="remove"] .board .road.player {
+    z-index:101;
+    height:2%;
+    border:2px solid yellow;
+}
+
 html[mode="placeroad"] .road:not(.player):hover {
 
+}
+
+html[mode="remove"] .corner.settlement, html[mode="remove"] .corner.city {
+    z-index:101;
+    background-color:yellow;
+    display:block;
+    opacity:1 !important;
 }
 
 html[mode="placesettlement"] .corner:not(.settlement):not(.city) {
