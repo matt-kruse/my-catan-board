@@ -35,15 +35,20 @@ html,body { margin:0; padding:0; overflow:hidden; background-color:rgb(44, 44, 4
     border-radius:20px;
     background-color:black;
     color:#eee;
-    padding:10px;
-    font-size:5vh;
+    padding:20px;
+    font-size:3.5vh;
     position:absolute;
     top:5vh;
     left:5vw;
     z-index:9999;
     font-family:sans-serif;
 }
+.welcome-note {
+    margin-top:25px;
+    font-size:2vh;
+}
 .welcome .button {
+    margin:20px;
     display:inline-block;
     font-weight:bold;
 }
