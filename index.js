@@ -172,9 +172,50 @@ let settlements = [
 ];
 
 // Create territories
+let resources = shuffle(["wood","wood","wood","wood","sheep","sheep","sheep","sheep","wheat","wheat","wheat","wheat","brick","brick","brick","ore","ore","ore","desert"]);
+
 i=0;
 let numbers = shuffle([2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12]);
-let resources = shuffle(["wood","wood","wood","wood","sheep","sheep","sheep","sheep","wheat","wheat","wheat","wheat","brick","brick","brick","ore","ore","ore","desert"]);
+// Make sure layout is valid
+function is_valid_board() {
+  let nums = JSON.parse(JSON.stringify(numbers));
+  let desert_index = resources.indexOf("desert");
+  nums.splice(desert_index,0,-1);
+  let pairs = [
+    /*
+          00  01  02
+        03  04  05  06
+      07  08  09  10  11
+        12  13  14  15
+          16  17  18
+     */
+    // side by side
+    0,1, 1,2,
+    3,4, 4,5, 5,6,
+    7,8, 8,9, 9,10, 10,11,
+    12,13, 13,14, 14,15,
+    16,17, 17,18,
+    // below
+    0,3, 0,4, 1,4, 1,5, 2,5, 2,6,
+    3,7, 3,8, 4,8, 4,9, 5,9, 5,10, 6,10, 6,11,
+    7,12, 8,12, 8,13, 9,13, 9,14, 10,14, 10,15, 11,15,
+    12,16, 13,16, 13,17, 14,17, 14,18, 15,18
+  ];
+  for (let i=0; i<pairs.length; i+=2) {
+    if ((nums[pairs[i]]===6 || nums[pairs[i]]===8) && (nums[pairs[i+1]]===6 || nums[pairs[i+1]]===8)) {
+      //console.log("Invalid Board!");
+      //console.log(nums);
+      //console.log(`For positions ${pairs[i]}, ${pairs[i+1]}`);
+      return false;
+    }
+  }
+  //console.log("Found valid board");
+  //console.log(nums);
+  return true;
+}
+while (!is_valid_board()) {
+  numbers = shuffle(numbers);
+}
 let t_num=0;
 function Territory(board,row,col,tsettlements) {
   this.resource = resources.shift();
