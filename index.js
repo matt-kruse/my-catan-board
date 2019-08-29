@@ -404,7 +404,7 @@ handler.roll = (el)=>{
   // Update dice
   Array.from(document.querySelectorAll('.dice')).forEach(d=>{
     d.className="dice";
-    let r = Math.ceil(Math.random()*5)+1;
+    let r = Math.ceil(Math.random()*6);
     roll += r;
     d.classList.add("dice-"+r);
   });
